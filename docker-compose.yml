@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-one
+      - service-two
+    networks:
+      - microservices-network
+
+  service-one:
+    build: ./service-one
+    ports:
+      - "8001:8001"
+    networks:
+      - microservices-network
+
+  service-two:
+    build: ./service-two
+    ports:
+      - "8002:8002"
+    networks:
+      - microservices-network
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - microservices-network
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    depends_on:
+      - prometheus
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
