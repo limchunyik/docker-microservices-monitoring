@@ -19,15 +19,16 @@ The project consists of:
 ## Getting Started
 
 1. Clone the repository:
-
+```
 git clone https://github.com/yourusername/docker-microservices-monitoring.git
 cd docker-microservices-monitoring
+```
 
 
 2. Start the services:
-
+```
 docker-compose up -d
-
+```
 
 3. Access the services:
 - API Gateway: http://localhost:8080
@@ -59,7 +60,3 @@ docker-compose up -d
 - Node.js and Express
 - Prometheus
 - Grafana
-
-## License
-
-MIT
